@@ -1,0 +1,8 @@
+li a {
+    color: green;
+}
+
+polls/static/polls/style.css¶
+body {
+    background: white url("images/background.jpg") no-repeat;
+}
