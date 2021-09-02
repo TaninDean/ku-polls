@@ -1,11 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-<<<<<<< HEAD
-from django.http import HttpResponse, response, Http404, HttpResponseRedirect
-from django.template import loader
-=======
 from django.urls import reverse
->>>>>>> be250ae (fix code)
 from django.views import generic
 from .models import Choice, Question
 
@@ -19,21 +14,6 @@ class IndexView(generic.ListView):
         return Question.objects.order_by('-pub_date')[:5]
 
 
-<<<<<<< HEAD
-def result(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/results.html', {'question' : question})
-
-class IndexView(generic.ListView):
-    template_name = 'polls/index.html'
-    context_object_name = 'latest_question_list'
-
-    def get_queryset(self):
-        return Question.objects.order_by('-pub_date')[:5]
-
-
-=======
->>>>>>> be250ae (fix code)
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
@@ -42,10 +22,6 @@ class DetailView(generic.DetailView):
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
-<<<<<<< HEAD
-
-=======
->>>>>>> be250ae (fix code)
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
