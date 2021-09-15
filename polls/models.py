@@ -1,16 +1,16 @@
 import datetime
 from django.db import models
 from django.utils import timezone
-
+from django.shortcuts import redirect
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
-    end_date = models.DateTimeField(default=timezone.now())
+    end_date = models.DateTimeField('date published')
 
     def is_published(self):
-        if self.was_published_recently():
-            return True
+        now = timezone.now()
+        return self.pub_date <= now < self.end_date
 
     def can_vote(self):
         if self.is_published():

@@ -1,5 +1,7 @@
 <h1>{{ question.question_text }}</h1>
-
+{% if was_published_recently == false  %}
+    <li><a href="{% url 'polls:index' %}"></a></li>
+{% endif %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="{% url 'polls:vote' question.id %}" method="post">
