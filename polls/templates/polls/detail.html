@@ -1,3 +1,8 @@
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+
+
 <h1>{{ question.question_text }}</h1>
 {% if was_published_recently == false  %}
     <li><a href="{% url 'polls:index' %}"></a></li>
@@ -12,3 +17,5 @@
 {% endfor %}
 <input type="submit" value="Vote">
 </form>
+
+<a class="btn btn-primary" href="{% url 'polls:index' %}" role="button">Back to List of Polls</a>
