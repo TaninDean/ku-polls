@@ -22,6 +22,18 @@ class QuestionModelTests(TestCase):
         recent_question = Question(pub_date=time)
         self.assertIs(recent_question.was_published_recently(), True)
 
+    def test_is_published(self):
+        time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
+        end_time = timezone.now() + datetime.timedelta(hours=23, minutes=59, seconds=59)
+        recent_question = Question(pub_date=time, end_date=end_time)
+        self.assertIs(recent_question.is_published(), True)
+
+    def test_can_vote(self):
+        time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
+        end_time = timezone.now() + datetime.timedelta(hours=23, minutes=59, seconds=59)
+        recent_question = Question(pub_date=time, end_date=end_time)
+        self.assertIs(recent_question.can_vote(), True)
+
 def create_question(question_text, days):
     time = timezone.now() + datetime.timedelta(days=days)
     return Question.objects.create(question_text=question_text, pub_date=time)
