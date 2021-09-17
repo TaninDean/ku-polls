@@ -12,6 +12,7 @@
         </div>
         <form class="d-flex">
             <a class="btn btn-outline-success" href="{% url 'polls:detail' question.id %}" type="submit">Link</a>
+            <a class="btn btn-outline-success" href="{% url 'polls:results' question.id%}" type="submit">Result</a>
           </form>
       </nav>
     {% endfor %}

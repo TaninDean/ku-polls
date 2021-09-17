@@ -1,15 +1,20 @@
 {% load static %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <h1>{{ question.question_text }}</h1>
+<div class="span6">
+    {% for choice in question.choice_set.all %}
+    <h5>Poll: Where do you usually browse</h5>
+    <strong>{{choice.choice_text}}</strong><span class="pull-right">{{choice.votes}}</span>
+    <div class="progress progress-danger active">
+        <div class="bar" style="width: 30%;"></div>
+    </div>
+    {% endfor %}
+    <a class ="btn btn-primary" href="{% url 'polls:detail' question.id %}" role="bottom">Vote again?</a>
+    <br><a class="btn btn-primary" href="{% url 'polls:index' %}" role="button">Back to List of Polls</a>
+</div>
 
-<ul>
-{% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul>
-
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
-
-<br><a class="btn btn-primary" href="{% url 'polls:index' %}" role="button">Back to List of Polls</a>
