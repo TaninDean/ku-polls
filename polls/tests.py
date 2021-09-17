@@ -36,7 +36,8 @@ class QuestionModelTests(TestCase):
 
 def create_question(question_text, days):
     time = timezone.now() + datetime.timedelta(days=days)
-    return Question.objects.create(question_text=question_text, pub_date=time)
+    time1 = timezone.now() + datetime.timedelta(days=days+7)
+    return Question.objects.create(question_text=question_text, pub_date=time, end_date=time1)
 
 
 class QuestionIndexViewTests(TestCase):
