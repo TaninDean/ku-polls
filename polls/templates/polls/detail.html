@@ -6,6 +6,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 {% if question.was_published_recently == false  %}
+    <script>alert("This polls not available now");</script>
     <li><a href="{% url 'polls:index' %}"></a></li>
 {% else %}
     <div class="row d-flex justify-content-center">
