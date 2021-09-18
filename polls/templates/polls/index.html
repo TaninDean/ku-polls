@@ -11,8 +11,10 @@
           <a class="navbar-brand">{{ question.question_text }}</a>
         </div>
         <form class="d-flex">
+          {% if question.is_published %}
             <a class="btn btn-outline-success" href="{% url 'polls:detail' question.id %}" type="submit">Link</a>
             <a class="btn btn-outline-success" href="{% url 'polls:results' question.id%}" type="submit">Result</a>
+          {% endif %}
           </form>
       </nav>
     {% endfor %}
