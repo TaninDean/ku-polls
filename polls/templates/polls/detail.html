@@ -8,27 +8,32 @@
 {% if question.was_published_recently == false  %}
     <li><a href="{% url 'polls:index' %}"></a></li>
 {% else %}
-
-    <div class="col-md-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    <span class="glyphicon glyphicon-circle-arrow-right"></span>{{ question.question_text }}</h3>
-            </div>
-            <form action="{% url 'polls:vote' question.id %}" method="post">
-            {% csrf_token %}
-            {% for choice in question.choice_set.all %}
-                <div class="panel-body two-col">
-                    <div class="well well-sm">
-                        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-                        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-circle-arrow-right"></span>{{ question.question_text }}</h3>
+                </div>
+                <form action="{% url 'polls:vote' question.id %}" method="post">
+                {% csrf_token %}
+                {% for choice in question.choice_set.all %}
+                    <div class="panel-body two-col">
+                        <div class="well well-sm">
+                            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="panel-footer">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-1">
+                            <input type="submit" value="Vote">
+                            <br><a href="{% url 'polls:index' %}" class="small">
+                                All polls </a>
+                        </div>
                     </div>
                 </div>
-            {% endfor %}
-            <div class="panel-footer">
-                <input type="submit" value="Vote">
-                <br><a href="{% url 'polls:index' %}" class="small">
-                    Back to List of Polls</button>
             </div>
         </div>
     </div>
