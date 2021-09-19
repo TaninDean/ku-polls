@@ -23,6 +23,9 @@ class DetailView(generic.DetailView):
     def get_queryset(self):
         return Question.objects.filter(pub_date__lte=timezone.now())
 
+    def redirect(self):
+        return HttpResponseRedirect(reverse('polls:index'))
+
 
 class ResultsView(generic.DetailView):
     model = Question
