@@ -1,3 +1,4 @@
+"""File to handle the path."""
 from django.urls import path
 
 from . import views
