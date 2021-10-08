@@ -19,5 +19,5 @@ script:
   - coverage run -m unittest discover -p "*_tests.py"
 
 after_script:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl https://codecov.io/bash) -t '160ac283-4e59-46cb-bdfa-100a9b3e782f'
   
