@@ -9,14 +9,15 @@ git:
 # Install dependencies
 install:
   - pip install -r requirements.txt
-    
+
+env:
+- CODECOV_TOKEN='160ac283-4e59-46cb-bdfa-100a9b3e782f'
+  
 # script to run tests. Script can have many commands, one per line.
 script: 
   - python -m unittest discover -p "*_tests.py"
   - coverage run -m unittest discover -p "*_tests.py"
 
-env:
-  - CODECOV_TOKEN='160ac283-4e59-46cb-bdfa-100a9b3e782f'
-
 after_script:
-  - codecov
+  - bash <(curl -s https://codecov.io/bash)
+  
