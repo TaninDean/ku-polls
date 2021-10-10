@@ -12,6 +12,9 @@ install:
 
 env:
 - CODECOV_TOKEN='160ac283-4e59-46cb-bdfa-100a9b3e782f'
+  global:
+  - secure: # encrypted string for SECRET_KEY
+  - secure: # encrypted string for another settings KEY
   
 # script to run tests. Script can have many commands, one per line.
 script: 

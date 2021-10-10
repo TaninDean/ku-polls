@@ -1,3 +1,5 @@
+"""Django to set path."""
+
 from django.contrib import admin
 from django.urls import include, path
 
