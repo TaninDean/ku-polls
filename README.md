@@ -9,9 +9,9 @@ The Polls will be of any sort, including Google Forms and SurveyMonkey, and will
 
 # Wiki
 
-if you want more detal please go here!
-
-[ku polls wiki](../../wiki/Home)
- * [Iteration1 Plane](../../wiki/Iteration-1-Plan)
+[Home](../../wiki/Home)
  * [Requirement](../../wiki/Requirements)
  * [Vision Statement](../../wiki/Vision-Statement)
+
+# Plan
+[Iteration1 Plane](../../wiki/Iteration-1-Plan)
