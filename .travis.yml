@@ -15,8 +15,8 @@ env:
   
 # script to run tests. Script can have many commands, one per line.
 script: 
-  - python -m unittest discover -p "*_tests.py"
-  - coverage run -m unittest discover -p "*_tests.py"
+  - python manage.py test polls
+  - coverage run manage.py test pools
 
 after_script:
   - bash <(curl -s https://codecov.io/bash)
