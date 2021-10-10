@@ -1,3 +1,5 @@
 # required packages
 coverage
 django
+python-decouple
+django-bootstrap-v5
