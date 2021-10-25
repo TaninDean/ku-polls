@@ -14,6 +14,6 @@ The Polls will be of any sort, including Google Forms and SurveyMonkey, and will
  * [Vision Statement](../../wiki/Vision-Statement)
 
 # Plan
-[Iteration1 Plane](../../wiki/Iteration-1-Plan)
-[Iteration2 Plane](../../wiki/Iteration-2-Plan)
+[Iteration1 Plane](../../wiki/Iteration-1-Plan)    
+[Iteration2 Plane](../../wiki/Iteration-2-Plan)    
 [Iteration3 Plane](../../wiki/Iteration-3-Plan)
