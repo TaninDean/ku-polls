@@ -2,6 +2,7 @@
 import datetime
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 class Question(models.Model):
@@ -50,3 +51,18 @@ class Choice(models.Model):
     def __str__(self):
         """Return choice_text in Choice."""
         return self.choice_text
+
+    @property
+    def votes(self): 
+        count = Vote.objects.filter(choice=self).count()
+        return count
+
+
+class Vote(models.Model):
+    # id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(
+        User, null=False, blank=False, on_delete=models.CASCADE)
+    choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Vote but {self.user.username} for {self.choice.choice_text}"
