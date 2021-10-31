@@ -35,6 +35,19 @@ class DetailView(generic.DetailView):
         """Return index urls."""
         return HttpResponseRedirect(reverse('polls:index'))
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_authenticated:
+            try:
+                vote = Vote.objects.get(user=user,
+                                        choice__question=context["question"])
+            except Vote.DoesNotExist:
+                pass
+
+        context["vote"] = vote
+        return context
+
 
 class ResultsView(generic.DetailView):
     """Class to hendel when user what to go to result page."""
@@ -60,7 +73,7 @@ def vote(request, question_id):
             Vote.objects.create(user=user, choice=selected_choice)
         else:
             vote.choice = selected_choice
-        vote.save()
+            vote.save()
         return HttpResponseRedirect(reverse('polls:results',
                                             args=(question.id,)))
 
@@ -71,7 +84,7 @@ def get_vote_for_user(user, poll_question):
         The user's vote or None if no vote for this polls.
     """
     try: 
-        votes = Vote.objects.filter(user=user).filter(choice_question=poll_question)
+        votes = Vote.objects.filter(user=user).filter(choice__question=poll_question)
         if votes.count() == 0:
             return None
         else:

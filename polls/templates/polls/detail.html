@@ -16,6 +16,9 @@
             <form action="{% url 'polls:vote' question.id %}" method="post">
             {% csrf_token %}
             {% for choice in question.choice_set.all %}
+                {% if vote.choice == choice %}
+                    <p>Your pervious question.</p>
+                {% endif %}
                 <div class="panel-body two-col">
                     <div class="well well-sm">
                         <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
