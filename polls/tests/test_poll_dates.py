@@ -1,6 +1,5 @@
 """File to contain test of all fucntions in all class."""
 import datetime
-from django.urls import reverse
 from django.test import TestCase
 from django.utils import timezone
 from polls.models import Question
