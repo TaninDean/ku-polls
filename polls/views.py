@@ -4,7 +4,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
-from .models import Choice, Question
+from .models import Choice, Question, Vote
+from django.contrib.auth.decorators import login_required
+import logging
 
 
 class IndexView(generic.ListView):
@@ -34,6 +36,20 @@ class DetailView(generic.DetailView):
         """Return index urls."""
         return HttpResponseRedirect(reverse('polls:index'))
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        vote = None
+        user = self.request.user
+        if user.is_authenticated:
+            try:
+                vote = Vote.objects.get(user=user,
+                                        choice__question=context["question"])
+            except Vote.DoesNotExist:
+                pass
+
+        context["vote"] = vote
+        return context
+
 
 class ResultsView(generic.DetailView):
     """Class to hendel when user what to go to result page."""
@@ -42,6 +58,7 @@ class ResultsView(generic.DetailView):
     template_name = 'polls/results.html'
 
 
+@login_required(login_url='/accounts/login/')
 def vote(request, question_id):
     """Return error when user submit the vote with out select choice."""
     question = get_object_or_404(Question, pk=question_id)
@@ -53,7 +70,31 @@ def vote(request, question_id):
             'error_message': "You didn't select a choice.",
         })
     else:
-        selected_choice.votes += 1
-        selected_choice.save()
+        user = request.user
+        vote = get_vote_for_user(user, question)
+        if not vote:
+            Vote.objects.create(user=user, choice=selected_choice)
+        else:
+            vote.choice = selected_choice
+            log = logging.getLogger("polls")
+            log.info(f"Vote but {user.username} for {selected_choice}")
+            vote.save()
         return HttpResponseRedirect(reverse('polls:results',
                                             args=(question.id,)))
+
+
+def get_vote_for_user(user, poll_question):
+    """Find and return an existing vote for user in poll question.
+
+    Return:
+        The user's vote or None if no vote for this polls.
+    """
+    try:
+        votes = Vote.objects.filter(user=user).filter(
+            choice__question=poll_question)
+        if votes.count() == 0:
+            return None
+        else:
+            return votes[0]
+    except Vote.DoesNotExist:
+        return None
