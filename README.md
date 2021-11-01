@@ -13,8 +13,8 @@ Users provided by the initial data (users.json):
 
 | Username  | Password    |
 |-----------|-------------|
-| user1     | tester12345    |
-| user2     | tester123456    |
+| demo1     | pass12345    |
+| demo2     | pass123456    |
 
 # Wiki
 
