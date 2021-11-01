@@ -7,6 +7,15 @@ or learning other preference idea.
 
 The Polls will be of any sort, including Google Forms and SurveyMonkey, and will not be limited to internet polling.
 
+## Running KU Polls
+
+Users provided by the initial data (users.json):
+
+| Username  | Password    |
+|-----------|-------------|
+| user1     | tester12345    |
+| user2     | tester123456    |
+
 # Wiki
 
 [Home](../../wiki/Home)
