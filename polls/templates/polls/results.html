@@ -2,26 +2,31 @@
 {% load bootstrap5 %}
 {% bootstrap_css %}
 
-<h1>{{ question.question_text }}</h1>
-<div class="center-text">
-    <div class="col">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">results</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for choice in question.choice_set.all %}
-                <tr>
-                    <th scope="row">{{choice.choice_text}}</th>
-                    <td>{{choice.votes}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <br><a href="{% url 'polls:index' %}" class="btn btn-primary" role="button">
-            Back </a>
+{% if user.is_authenticated %}
+    <h1>{{ question.question_text }}</h1>
+    <div class="center-text">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">results</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for choice in question.choice_set.all %}
+                    <tr>
+                        <th scope="row">{{choice.choice_text}}</th>
+                        <td>{{choice.votes}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br><a href="{% url 'polls:index' %}" class="btn btn-primary" role="button">
+                Back </a>
+        </div>
     </div>
-</div>
+{% else %}
+<script>alert('You need to login')</script>
+<META HTTP-EQUIV="Refresh" CONTENT="0 ; URL=/accounts/login">
+{% endif %}

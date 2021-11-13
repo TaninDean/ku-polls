@@ -4,21 +4,24 @@
 {% bootstrap_css %}
 
 {% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand">{{ question.question_text }}</a>
-        </div>
-        <form class="d-flex">
-          {% if question.is_published %}
-            <a class="btn btn-outline-success" href="{% url 'polls:detail' question.id %}" type="submit">Link</a>
-            <a class="btn btn-outline-success" href="{% url 'polls:results' question.id%}" type="submit">Result</a>
-          {% endif %}
-          </form>
-      </nav>
-    {% endfor %}
-    </ul>
+<ul>
+  {% for question in latest_question_list %}
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand">{{ question.question_text }}</a>
+    </div>
+    <form class="d-flex">
+      {% if question.is_published %}
+      <a class="btn btn-outline-success" href="{% url 'polls:detail' question.id %}" type="submit">Link</a>
+      <a class="btn btn-outline-success" href="{% url 'polls:results' question.id%}" type="submit">Result</a>
+      {% else %}
+      <p class='text-uppercase fw-bold text-danger'>Polls is not published</p>
+      {% endif %}
+    </form>
+  </nav>
+  {% endfor %}
+</ul>
 {% else %}
-    <p>No polls are available.</p>
+<p>No polls are available.</p>
+
 {% endif %}
